@@ -4,23 +4,14 @@
 # Author: Adrienne Winter, 2022.
 
 # README:
-# You will need to install some dependencies before using:
-# pip install aspose-cells
-# pip install JPype1
-# Make sure you have Java (JDK) installed https://www.oracle.com/java/technologies/downloads/ 
-# Make sure the JAVA_HOME environment variable is set to the path where your jvm.dll is saved 
-# e.g. "C:\Program Files\Java\jdk-18.0.2\bin\server"
+# Assumes that there is no file named "Excel_to_PDF" already existing in the "folderPath" directory.
 
 # Set the folder path variable for the folder containing the Excel sheets to convert into PDF.
 # Remember to add an escape \ in your file path name -> C:File\\Path\\Name
 # -----------------------------------------------------------------------------------
 
 import os
-import shutil
-import jpype
-jpype.startJVM()
-import asposecells
-from asposecells.api import *
+from win32com import client
 
 # Setting variables
 folderPath = "C:\\Users\\Dell\\Documents\\MASTERS\\Funding\\OMT - Oppenheimer Memorial Trust"
@@ -28,17 +19,16 @@ folderPath = "C:\\Users\\Dell\\Documents\\MASTERS\\Funding\\OMT - Oppenheimer Me
 # Create folder to save PDFs into
 os.makedirs(f"{folderPath}\\Excel_to_PDF")
 
-# Convert Excel to PDF and save in PDF folder "Excel_to_PDF"
+# Save Excel files as PDFs
 for fileName in os.listdir(folderPath):
-    fileExtension = fileName.split('.')[-1]
-    if fileExtension != ("xlsx" or "xls"):
-        print(f"Skipping '{fileName}' because it is not an Excel file.")
+    if fileName.split(".")[-1] != ("xlsx" or "xls"):
+        print(f"Skipping {fileName} as it is not an Excel file.")
     else:
-        excelFile = Workbook(f"{folderPath}\\{fileName}")
-        PDFname = fileName.split('.')[0]
-        excelFile.save(f"{folderPath}\\{PDFname}.pdf", SaveFormat.PDF)
-        shutil.move(f"{folderPath}\\{PDFname}.pdf", f"{folderPath}\\Excel_to_PDF")
-        print(f"Creating file {PDFname}.pdf in {folderPath}\\Excel_to_PDF")
+        excelObj = client.Dispatch("Excel.Application")
+        excelWorkbook = excelObj.Workbooks.Open(f"{folderPath}\\{fileName}")
+        PDFname = fileName.split(".")[0]
+        excelWorkbook.SaveAs(f"{folderPath}\\Excel_to_PDF\\{PDFname}", FileFormat=57)
+        print(f"Saving {fileName} as PDF in {folderPath}\\Excel_to_PDF")
 
-# End the Java Virtual Machine
-jpype.shutdownJVM()
+excelWorkbook.Close()
+excelObj.Quit()
