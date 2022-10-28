@@ -4,8 +4,7 @@
 # Author: Adrienne Winter, 2022.
 
 # README:
-# This script will rename all files in the chosen folder so make sure the folder only
-# contains the files to rename.
+# This script will .
 
 # Depending on how you want the files to be renamed, you may need to edit the new_name variable.
 # Remember to add an escape \ in your file path name -> "C:File\\Path\\Name"
