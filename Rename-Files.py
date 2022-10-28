@@ -14,7 +14,7 @@ import os
 import shutil
 
 # Setting variables
-folder_path = "C:\\Users\\Dell\\Downloads\\EEE3096S\\Class Lists"
+folder_path = "C:\\OpenCV_Dev\\build\\install\\x64\\vc15\\lib"
 
 # Create folder to save renamed files into
 os.makedirs(f"{folder_path}\\Renamed_Files")
