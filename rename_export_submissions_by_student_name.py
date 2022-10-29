@@ -9,17 +9,12 @@
 # Remember to add an escape to the folder path "C:\\Folder\\Path"
 # ------------------------------------------------------------------------------------
 
-'''
-usage:   rename_export_submissions.py export_folder
-         eg. rename_export_submissions.py assignment_1234_export
-'''
-
 import os
 import sys
 import yaml
 
 # setting variables
-export_folder_name = "C:\\Users\\Dell\\Downloads\\Test1Part1\\Part1"
+export_folder_name = "C:\\Users\\Dell\\Downloads\\GA Test 2"
 
 # open .yaml metadata file
 metadata = export_folder_name + "\\submission_metadata.yml"
@@ -35,12 +30,12 @@ for filename in dir_list:
         submitters = submission_metadata[filename][':submitters']
         names = map(lambda submitter: submitter[':name'], submitters)
         sids = map(lambda submitter: submitter[':sid'], submitters)
-        joined_sids = "".join("".join(sids))
+        joined_sids = "".join("_".join(sids))
         joined_names = "_".join("_".join(names).split(" "))
         joined_names = joined_names[joined_names.find("_")+1:] + "_" + joined_names[:joined_names.find("_")] 
 
         src = export_folder_name + '/' + filename
-        dst = export_folder_name + '/' + 'EEE3096S_Test1_Part1' + "_" + joined_sids.upper() + "_" + "2022" + '.pdf'
+        dst = export_folder_name + '/' + 'EEE3096S_GA Test 2' + "_" + joined_sids.upper() + "_" + "2022" + '.pdf'
         os.rename(src, dst)
         i += 1
         print('Renamed ' + str(i) + ' of ' + str(num_of_files))

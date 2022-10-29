@@ -4,9 +4,9 @@
 # Author: Adrienne Winter, 2022.
 
 # README:
-# Assumes that there is no file named "Excel_to_PDF" already existing in the "folderPath" directory.
+# Assumes that there is no folder named "Excel_to_PDF" already existing in the "folderPath" directory.
 
-# Set the folder path variable for the folder containing the Excel sheets to convert into PDF.
+# Set the 'folderPath' variable for the folder containing the Excel sheets to convert into PDF.
 # Remember to add an escape \ in your file path name -> C:File\\Path\\Name
 # -----------------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ import os
 from win32com import client
 
 # Setting variables
-folderPath = "C:\\Users\\Dell\\Documents\\MASTERS\\Funding\\OMT - Oppenheimer Memorial Trust"
+folderPath = "C:\\Users\\Dell\\Downloads\\Generated Forms\\Generated Forms"
 
 # Create folder to save PDFs into
 os.makedirs(f"{folderPath}\\Excel_to_PDF")
