@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------------
-# Renames exported Gradescope submissions (in place).
+# Renames exported Gradescope submissions with the student's name (in same directory).
 
 # README:
 # You need to cd into the correct folder with the .yaml file and the submissions.
